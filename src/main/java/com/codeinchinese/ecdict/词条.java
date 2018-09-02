@@ -5,19 +5,39 @@ package com.codeinchinese.ecdict;
  */
 public class 词条 {
 
-  private String 英文;
-  private String 音标;
-  private String 英文释义;
-  private String 中文释义;
-  private String 词语位置;
-  private String 柯林斯星级;
-  private String 为牛津三千核心词;
+  // TODO: 避免public域?
+  public String 英文;
+  public String 音标;
+  public String 英文释义;
+  public String 中文释义;
+  public String 词语位置;
+  public String 柯林斯星级;
+  public String 为牛津三千核心词;
 
   // zk/中考，gk/高考，cet4/四级等
-  private String 标签;
-  private String 英国国家语料库词频顺序;
-  private String 当代语料库词频顺序;
-  private String 变形;
-  private String 详细;
-  private String 在线读音音频;
+  public String 标签;
+  public String 英国国家语料库词频顺序;
+  public String 当代语料库词频顺序;
+  public String 变形;
+  public String 详细;
+  public String 在线读音音频;
+
+  @Override
+  public String toString() {
+    return "{" +
+  "英文: " + 英文 + "\n" +
+  "音标: " + 音标 + "\n"  +
+  "英文释义: " + 英文释义 + "\n"  +
+  "中文释义: " + 中文释义 + "\n"  +
+  "词语位置: " + 词语位置 + "\n"  +
+  "柯林斯星级: " + 柯林斯星级 + "\n"  +
+  "为牛津三千核心词: " + 为牛津三千核心词 + "\n"  +
+  "标签: " + 标签 + "\n"  +
+  "英国国家语料库词频顺序: " + 英国国家语料库词频顺序 + "\n"  +
+  "当代语料库词频顺序: " + 当代语料库词频顺序 + "\n"  +
+  "变形: " + 变形 + "\n"  +
+  "详细: " + 详细 + "\n"  +
+  "在线读音音频: " + 在线读音音频 + "\n"  +
+  "}";
+  }
 }
