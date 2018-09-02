@@ -33,11 +33,11 @@ public class 英汉词典 {
         新词.英文释义 = 行[2];
         新词.中文释义 = 行[3];
         新词.词语位置 = 行[4];
-        新词.柯林斯星级 = 行[5];
-        新词.为牛津三千核心词 = 行[6];
+        新词.柯林斯星级 = 转为整数(行[5]);
+        新词.为牛津三千核心词 = 转为布尔量(行[6]);
         新词.标签 = 行[7];
-        新词.英国国家语料库词频顺序 = 行[8];
-        新词.当代语料库词频顺序 = 行[9];
+        新词.英国国家语料库词频顺序 = 转为整数(行[8]);
+        新词.当代语料库词频顺序 = 转为整数(行[9]);
         新词.变形 = 行[10];
         新词.详细 = 行[11];
         新词.在线读音音频 = 行[12];
@@ -51,6 +51,17 @@ public class 英汉词典 {
 
   public static int 查词(String 英文词) {
     return 0;
+  }
+
+  private static boolean 转为布尔量(String 数字) {
+    if (!数字.equals("1") && !数字.isEmpty()) {
+      System.out.println("非布尔: " + 数字);
+    }
+    return 数字.equals("1");
+  }
+
+  private static int 转为整数(String 数字字符串) {
+    return 数字字符串.isEmpty() ? 0 : Integer.parseInt(数字字符串);
   }
 
   public static List<String[]> 所有词条() {

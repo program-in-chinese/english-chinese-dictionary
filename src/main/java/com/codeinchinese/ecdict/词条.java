@@ -11,13 +11,16 @@ public class 词条 {
   public String 英文释义;
   public String 中文释义;
   public String 词语位置;
-  public String 柯林斯星级;
-  public String 为牛津三千核心词;
+  public int 柯林斯星级;
+  public boolean 为牛津三千核心词;
 
   // zk/中考，gk/高考，cet4/四级等
   public String 标签;
-  public String 英国国家语料库词频顺序;
-  public String 当代语料库词频顺序;
+
+  // 如果为0, 无词频数据, 否则为正数
+  public int 英国国家语料库词频顺序;
+  public int 当代语料库词频顺序;
+
   public String 变形;
   public String 详细;
   public String 在线读音音频;

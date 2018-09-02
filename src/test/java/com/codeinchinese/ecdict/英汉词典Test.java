@@ -1,35 +1,100 @@
 package com.codeinchinese.ecdict;
 
+import static com.github.program_in_chinese.junit4_in_chinese.断言.为真;
 import static com.github.program_in_chinese.junit4_in_chinese.断言.相等;
 
 import org.junit.Test;
 
 public class 英汉词典Test {
   @Test
-  public void test查词() {
+  public void 查词() {
     相等(英汉词典.查词(""), 0);
   }
 
   @Test
-  public void test总词条数() {
+  public void 总词条数() {
     相等(英汉词典.所有词条().size(), 770611);
     相等(英汉词典.查词表.size(), 770611);
 
     // TODO: 发布前删除. 临时代码, 为寻找合适的测试用例(某域不为空)
     for (String 英文 : 英汉词典.查词表.keySet()) {
       词条 某词条 = 英汉词典.查词表.get(英文);
-      if (!某词条.详细.isEmpty()) {
+      if (!某词条.在线读音音频.isEmpty()) {
         System.out.println(某词条);
         break;
       }
     }
   }
 
-  // 测试每行的字段数 13
   @Test
-  public void test字段数() {
+  public void 字段数() {
     for (String[] 词条 : 英汉词典.所有词条()) {
+
+      // 测试每行的字段数 13
       相等(词条.length, 13);
+
+      // 测试每行英文均不为空
+      为真(!词条[0].isEmpty());
     }
   }
+
+  ///// 下面测试每个域
+
+  @Test
+  public void 音标() {
+    相等(英汉词典.查词表.get("a").音标, "ei");
+  }
+
+  @Test
+  public void 英文释义() {
+    相等(英汉词典.查词表.get("a").英文释义,
+        "n. the 1st letter of the Roman alphabetnn. the blood group whose red cells carry the A antigen");
+  }
+
+  @Test
+  public void 中文释义() {
+    相等(英汉词典.查词表.get("a").中文释义,
+        "第一个字母 A; 一个; 第一的rnart. [计] 累加器, 加法器, 地址, 振幅, 模拟, 区域, 面积, 汇编, 组件, 异步");
+  }
+
+  // TODO: 现在数据中'词语位置'域全为空
+
+  @Test
+  public void 星级() {
+    相等(英汉词典.查词表.get("a").柯林斯星级, 5);
+  }
+
+  @Test
+  public void 牛津核心() {
+    相等(英汉词典.查词表.get("a").为牛津三千核心词, true);
+  }
+
+  @Test
+  public void 标签() {
+    相等(英汉词典.查词表.get("abrupt").标签, "gk cet6 ky toefl ielts gre");
+  }
+
+  @Test
+  public void 英国国家语料词频() {
+    相等(英汉词典.查词表.get("a").英国国家语料库词频顺序, 5);
+  }
+
+  @Test
+  public void 当代语料库词频() {
+    相等(英汉词典.查词表.get("a").当代语料库词频顺序, 5);
+  }
+
+  @Test
+  public void 变形() {
+    相等(英汉词典.查词表.get("collocate").变形,
+        "s:collocates/3:collocates/i:collocating/p:collocated/d:collocated");
+  }
+
+  // 非空'详细'域只有双引号
+  @Test
+  public void 详细() {
+    相等(英汉词典.查词表.get("a").详细, "\"\"");
+  }
+
+  // TODO: '在线读音音频'全为空
 }
