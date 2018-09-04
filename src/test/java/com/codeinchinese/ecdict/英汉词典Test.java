@@ -3,6 +3,8 @@ package com.codeinchinese.ecdict;
 import static com.github.program_in_chinese.junit4_in_chinese.断言.为真;
 import static com.github.program_in_chinese.junit4_in_chinese.断言.相等;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class 英汉词典Test {
@@ -45,12 +47,14 @@ public class 英汉词典Test {
     相等(英汉词典.查词表.get("a").音标, "ei");
   }
 
+  // TODO: 按/n分隔; 提取词性
   @Test
   public void 英文释义() {
     相等(英汉词典.查词表.get("a").英文释义,
         "n. the 1st letter of the Roman alphabetnn. the blood group whose red cells carry the A antigen");
   }
 
+  // TODO: 按/n分隔; 提取词性
   @Test
   public void 中文释义() {
     相等(英汉词典.查词表.get("a").中文释义,
@@ -69,6 +73,7 @@ public class 英汉词典Test {
     相等(英汉词典.查词表.get("a").为牛津三千核心词, true);
   }
 
+  // TODO: 提取
   @Test
   public void 标签() {
     相等(英汉词典.查词表.get("abrupt").标签, "gk cet6 ky toefl ielts gre");
@@ -86,8 +91,14 @@ public class 英汉词典Test {
 
   @Test
   public void 变形() {
-    相等(英汉词典.查词表.get("collocate").变形,
-        "s:collocates/3:collocates/i:collocating/p:collocated/d:collocated");
+    相等(英汉词典.查词表.get("a").变形.size(), 0);
+
+    List<词形变化> 变形 = 英汉词典.查词表.get("collocate").变形;
+    相等(变形.get(0), new 词形变化(词形变化类型.名词复数形式, "collocates"));
+    相等(变形.get(1), new 词形变化(词形变化类型.第三人称单数, "collocates"));
+    相等(变形.get(2), new 词形变化(词形变化类型.现在分词, "collocating"));
+    相等(变形.get(3), new 词形变化(词形变化类型.过去式, "collocated"));
+    相等(变形.get(4), new 词形变化(词形变化类型.过去分词, "collocated"));
   }
 
   // 非空'详细'域只有双引号

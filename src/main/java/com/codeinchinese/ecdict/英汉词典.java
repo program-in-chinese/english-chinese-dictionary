@@ -38,7 +38,7 @@ public class 英汉词典 {
         新词.标签 = 行[7];
         新词.英国国家语料库词频顺序 = 转为整数(行[8]);
         新词.当代语料库词频顺序 = 转为整数(行[9]);
-        新词.变形 = 行[10];
+        新词.变形 = 转为词形变化(行[10]);
         新词.详细 = 行[11];
         新词.在线读音音频 = 行[12];
 
@@ -51,6 +51,24 @@ public class 英汉词典 {
 
   public static int 查词(String 英文词) {
     return 0;
+  }
+
+  private static List<词形变化> 转为词形变化(String 变形原字符串) {
+    List<词形变化> 变化 = new ArrayList<>();
+    if (变形原字符串.isEmpty()) {
+      return 变化;
+    }
+    String[] 词形字段 = 变形原字符串.split("/");
+    for (String 某字段 : 词形字段) {
+      String[] 分段 = 某字段.split(":");
+      if (分段.length != 2) {
+
+        // 如hyphen(vt): s:hyphens/p:hyphened/i:/3:hyphens/d:, i与d缺失, 暂时略过
+        continue;
+      }
+      变化.add(new 词形变化(词形变化类型.转换(分段[0]), 分段[1]));
+    }
+    return 变化;
   }
 
   private static boolean 转为布尔量(String 数字) {
