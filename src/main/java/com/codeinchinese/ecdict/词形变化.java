@@ -14,4 +14,9 @@ public class 词形变化 {
     return 个体 instanceof 词形变化 && this.类型.equals(((词形变化) 个体).类型) && this.词形.equals(((词形变化) 个体).词形);
   }
 
+  @Override
+  public String toString() {
+    return 类型.toString() + ":" + 词形;
+  }
+
 }

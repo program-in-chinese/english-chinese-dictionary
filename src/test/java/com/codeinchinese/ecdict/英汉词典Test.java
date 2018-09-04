@@ -21,7 +21,7 @@ public class 英汉词典Test {
     // TODO: 发布前删除. 临时代码, 为寻找合适的测试用例(某域不为空)
     for (String 英文 : 英汉词典.查词表.keySet()) {
       词条 某词条 = 英汉词典.查词表.get(英文);
-      if (!某词条.在线读音音频.isEmpty()) {
+      if (某词条.中文释义.indexOf("\\n") != -1) {
         System.out.println(某词条);
         break;
       }
@@ -51,14 +51,14 @@ public class 英汉词典Test {
   @Test
   public void 英文释义() {
     相等(英汉词典.查词表.get("a").英文释义,
-        "n. the 1st letter of the Roman alphabetnn. the blood group whose red cells carry the A antigen");
+        "n. the 1st letter of the Roman alphabet\\nn. the blood group whose red cells carry the A antigen");
   }
 
   // TODO: 按/n分隔; 提取词性
   @Test
   public void 中文释义() {
     相等(英汉词典.查词表.get("a").中文释义,
-        "第一个字母 A; 一个; 第一的rnart. [计] 累加器, 加法器, 地址, 振幅, 模拟, 区域, 面积, 汇编, 组件, 异步");
+        "第一个字母 A; 一个; 第一的\\r\\nart. [计] 累加器, 加法器, 地址, 振幅, 模拟, 区域, 面积, 汇编, 组件, 异步");
   }
 
   // TODO: 现在数据中'词语位置'域全为空

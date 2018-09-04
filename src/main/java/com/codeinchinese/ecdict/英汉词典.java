@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.RFC4180Parser;
+import com.opencsv.RFC4180ParserBuilder;
 
 public class 英汉词典 {
 
@@ -18,8 +21,13 @@ public class 英汉词典 {
   public static Map<String, 词条> 查词表 = new HashMap<>();
 
   static {
+    RFC4180Parser rfc4180Parser = new RFC4180ParserBuilder().build();
+
     try {
-      读者 = new CSVReader(new FileReader(源数据文件));
+      CSVReaderBuilder csvReaderBuilder =
+          new CSVReaderBuilder(new FileReader(源数据文件)).withCSVParser(rfc4180Parser);
+
+      读者 = csvReaderBuilder.build();
 
       // 跳过第一行(头)
       读者.readNext();
