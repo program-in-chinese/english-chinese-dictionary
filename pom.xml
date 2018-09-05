@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.codeinchinese</groupId>
-	<artifactId>ecdict</artifactId>
+	<artifactId>english-chinese-dictionary</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>英汉词典</name>
-    <description>查询英文词和词组的释义, 词频, 词形变化等. 数据来源为@skywind3000的ECDICT</description>
+	<description>查询英文词和词组的中英释义, 词频, 词形变化等. 数据来源为@skywind3000的ECDICT</description>
 	<url>http://maven.apache.org</url>
 
 	<licenses>
