@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<name>英汉词典</name>
 	<description>查询英文词和词组的中英释义, 词频, 词形变化等. 数据来源为@skywind3000的ECDICT</description>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/program-in-chinese/english-chinese-dictionary</url>
 
 	<licenses>
 		<license>
@@ -18,7 +18,12 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
+	<scm>
+		<connection>scm:git:https://github.com/program-in-chinese/english-chinese-dictionary.git</connection>
+		<developerConnection>scm:git:https://github.com/program-in-chinese/english-chinese-dictionary.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/program-in-chinese/english-chinese-dictionary</url>
+	</scm>
 	<developers>
 		<developer>
 			<id>nobodxbodon</id>
