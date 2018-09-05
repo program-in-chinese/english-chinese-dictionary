@@ -7,9 +7,10 @@
 	<artifactId>ecdict</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
-	<name>ecdict</name>
+	<name>英汉词典</name>
+    <description>查询英文词和词组的释义, 词频, 词形变化等. 数据来源为@skywind3000的ECDICT</description>
 	<url>http://maven.apache.org</url>
+
 	<licenses>
 		<license>
 			<name>GNU Lesser General Public License</name>
@@ -52,4 +53,14 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>
