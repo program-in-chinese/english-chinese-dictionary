@@ -13,13 +13,18 @@ import com.opencsv.CSVReaderBuilder;
 import com.opencsv.RFC4180Parser;
 import com.opencsv.RFC4180ParserBuilder;
 
+/**
+ * 词典数据来源: https://github.com/skywind3000/ECDICT v1.0.28中的ecdict.csv文件.
+ * 
+ */
 public class 英汉词典 {
 
   private static final String 源数据文件 = "src/main/resources/ecdict.csv";
+  private static final List<String[]> 所有行 = new ArrayList<>();
+
+  protected static Map<String, 词条> 查词表 = new HashMap<>();
 
   private static CSVReader 读者 = null;
-  private static List<String[]> 所有行 = new ArrayList<>();
-  public static Map<String, 词条> 查词表 = new HashMap<>();
 
   static {
     RFC4180Parser rfc4180Parser = new RFC4180ParserBuilder().build();
@@ -58,8 +63,9 @@ public class 英汉词典 {
     }
   }
 
-  public static int 查词(String 英文词) {
-    return 0;
+  // TODO: 如为空?
+  public static 词条 查词(String 英文词) {
+    return 查词表.get(英文词);
   }
 
   private static List<String> 分隔释义(String 原释义) {
@@ -98,7 +104,7 @@ public class 英汉词典 {
     return 数字字符串.isEmpty() ? 0 : Integer.parseInt(数字字符串);
   }
 
-  public static List<String[]> 所有词条() {
+  public static List<String[]> 所有原始词条() {
     return 所有行;
   }
 }
