@@ -1,4 +1,4 @@
-package com.codeinchinese.ecdict;
+package com.codeinchinese.英汉词典;
 
 import static com.github.program_in_chinese.junit4_in_chinese.断言.为假;
 import static com.github.program_in_chinese.junit4_in_chinese.断言.相等;
@@ -8,6 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
+
+import com.codeinchinese.英汉词典.英汉词典;
+import com.codeinchinese.英汉词典.词形变化;
+import com.codeinchinese.英汉词典.词条;
 
 public class 词表校验Test {
 
@@ -222,11 +226,6 @@ public class 词表校验Test {
       "undershoot",
       "worst"
       ));
-
-  @Test
-  public void 查不到词() {
-    相等(英汉词典.查词(""), null);
-  }
 
   @Test
   public void 总词条数() {

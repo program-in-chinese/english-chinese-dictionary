@@ -1,4 +1,4 @@
-package com.codeinchinese.ecdict;
+package com.codeinchinese.英汉词典;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class 词条 {
 
   @Override
   public String toString() {
-    return "{" +
+    return "{\n" +
   "英文: " + 英文 + "\n" +
   "音标: " + 音标 + "\n"  +
   "英文释义: " + 转为文本(英文释义, "\n") + "\n"  +

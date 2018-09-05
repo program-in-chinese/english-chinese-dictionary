@@ -1,4 +1,4 @@
-package com.codeinchinese.ecdict;
+package com.codeinchinese.英汉词典;
 
 import java.io.FileReader;
 import java.io.IOException;

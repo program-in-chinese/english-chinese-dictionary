@@ -1,4 +1,4 @@
-package com.codeinchinese.ecdict;
+package com.codeinchinese.英汉词典;
 
 import static com.github.program_in_chinese.junit4_in_chinese.断言.相等;
 
@@ -7,11 +7,20 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.codeinchinese.英汉词典.英汉词典;
+import com.codeinchinese.英汉词典.词形变化;
+import com.codeinchinese.英汉词典.词形变化类型;
+
 /**
  * 测试返回词条的每个域
  *
  */
 public class 查词Test {
+
+  @Test
+  public void 查不到词() {
+    相等(英汉词典.查词(""), null);
+  }
 
   @Test
   public void 音标() {

@@ -1,4 +1,4 @@
-package com.codeinchinese.ecdict;
+package com.codeinchinese.英汉词典;
 
 public class 词形变化 {
   public 词形变化类型 类型;
