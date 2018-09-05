@@ -3,7 +3,7 @@ package com.codeinchinese.ecdict;
 import java.util.List;
 
 /**
- * 对应数据格式: https://github.com/skywind3000/ECDICT#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F
+ * 数据格式: https://github.com/skywind3000/ECDICT#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F
  */
 public class 词条 {
 

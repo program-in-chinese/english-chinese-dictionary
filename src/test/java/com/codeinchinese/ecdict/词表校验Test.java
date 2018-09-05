@@ -199,11 +199,29 @@ public class 词表校验Test {
   private static final Set<String> 中文释义带换行的词汇 =
       new HashSet<>(Arrays.asList("companied", "companying", "say-", "say-ing", "welled"));
 
-  // TODO: 此中文释义为纯英文, 需改正数据; 且英文释义为空
+  // TODO: 此中文释义为纯英文, 且英文释义为空, 需改正数据
   private static final Set<String> 中文释义为英文且换行的词汇 = new HashSet<>(
       Arrays.asList("awreet", "bananery", "besotten", "cropful", "dishumor", "duckish", "famble",
           "foredream", "furtle", "huswifely", "loave", "midshock", "overclad", "parasigmoid",
           "peent", "rameish", "sarcle", "spight", "squop", "swaggy", "whoost", "wough", "wramp"));
+
+  // 如bath: s:baths/3:baths/i:/p:bathed/d:bathed 的i对应词形为空
+  private static final Set<String> 词形变化之一为空的词汇 = new HashSet<>(Arrays.asList(
+      "bath",
+      "bitt",
+      "burr",
+      "can",
+      "crossbreed",
+      "hyphen",
+      "matter",
+      "plat",
+      "reproof",
+      "sick",
+      "stink",
+      "swathe",
+      "undershoot",
+      "worst"
+      ));
 
   @Test
   public void 查不到词() {
@@ -216,13 +234,16 @@ public class 词表校验Test {
     相等(英汉词典.查词表.size(), 770611);
 
     // TODO: 发布前删除. 临时代码, 为寻找合适的测试用例(某域不为空)
-    for (String[] 词条 : 英汉词典.所有原始词条()) {
+    /*for (String[] 词条 : 英汉词典.所有原始词条()) {
       词条 某词条 = 英汉词典.查词(词条[0]);
-      if (某词条.中文释义.indexOf("\\n") != -1) {
-        System.out.println(某词条);
-        break;
+      List<词形变化> 变化 = 某词条.变形;
+      for (词形变化 某变化 : 变化) {
+        if (某变化.词形.isEmpty()) {
+          System.out.println("\"" + 某词条.英文 + "\",");
+          break;
+        }
       }
-    }
+    }*/
   }
 
   @Test
@@ -256,6 +277,18 @@ public class 词表校验Test {
       if (!中文释义带换行的词汇.contains(某词条.英文) && !中文释义为英文且换行的词汇.contains(某词条.英文)) {
         for (String 释义 : 某词条.中文释义) {
           验证文本非空(释义);
+        }
+      }
+    }
+  }
+
+  @Test
+  public void 验证词形非空() {
+    for (String[] 词条 : 英汉词典.所有原始词条()) {
+      词条 某词条 = 英汉词典.查词(词条[0]);
+      if (!词形变化之一为空的词汇.contains(某词条.英文)) {
+        for (词形变化 变化 : 某词条.变形) {
+          验证文本非空(变化.词形);
         }
       }
     }

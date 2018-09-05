@@ -15,7 +15,8 @@ import com.opencsv.RFC4180ParserBuilder;
 
 /**
  * 词典数据来源: https://github.com/skywind3000/ECDICT v1.0.28中的ecdict.csv文件.
- * 
+ * 提取/分隔规则取自原词典数据说明文档.
+ * 可查单词和常见词组, 如: be bad at, beat around the bush 等
  */
 public class 英汉词典 {
 
@@ -63,11 +64,28 @@ public class 英汉词典 {
     }
   }
 
-  // TODO: 如为空?
+  /**
+   * 返回英文完全匹配(大小写相同, 无变形)的词条
+   * @param 英文词 大小写敏感
+   * @return null 如果未查到此词
+   */
   public static 词条 查词(String 英文词) {
     return 查词表.get(英文词);
   }
 
+  /**
+   * 数组长度13, 数据格式见https://github.com/skywind3000/ECDICT#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F
+   * @return 从csv文件按行拆分出的字段列表, 无额外提取/转换/清理处理
+   */
+  public static List<String[]> 所有原始词条() {
+    return 所有行;
+  }
+
+  /**
+   * 释义部分按行分隔释义. 有小比例词汇释义数据非按行分隔, 详见测试.
+   * @param 原释义
+   * @return
+   */
   private static List<String> 分隔释义(String 原释义) {
     if (原释义.isEmpty()) {
       return new ArrayList<>();
@@ -75,36 +93,31 @@ public class 英汉词典 {
     return Arrays.asList(原释义.split("\\\\n"));
   }
 
-  private static List<词形变化> 转为词形变化(String 变形原字符串) {
+  /**
+   * 词形部分数据格式描述: https://github.com/skywind3000/ECDICT#%E8%AF%8D%E5%BD%A2%E5%8F%98%E5%8C%96
+   * @param 原字符串
+   * @return 提取所有词形变化置于列表
+   */
+  private static List<词形变化> 转为词形变化(String 原字符串) {
     List<词形变化> 变化 = new ArrayList<>();
-    if (变形原字符串.isEmpty()) {
+    if (原字符串.isEmpty()) {
       return 变化;
     }
-    String[] 词形字段 = 变形原字符串.split("/");
+    String[] 词形字段 = 原字符串.split("/");
     for (String 某字段 : 词形字段) {
       String[] 分段 = 某字段.split(":");
-      if (分段.length != 2) {
 
-        // 如hyphen(vt): s:hyphens/p:hyphened/i:/3:hyphens/d:, i与d缺失, 暂时略过
-        continue;
-      }
-      变化.add(new 词形变化(词形变化类型.转换(分段[0]), 分段[1]));
+      // 如hyphen(vt): s:hyphens/p:hyphened/i:/3:hyphens/d:, i与d内容缺失, 用空字符串占位
+      变化.add(new 词形变化(词形变化类型.转换(分段[0]), 分段.length == 1 ? "" : 分段[1]));
     }
     return 变化;
   }
 
   private static boolean 转为布尔量(String 数字) {
-    if (!数字.equals("1") && !数字.isEmpty()) {
-      System.out.println("非布尔: " + 数字);
-    }
     return 数字.equals("1");
   }
 
   private static int 转为整数(String 数字字符串) {
     return 数字字符串.isEmpty() ? 0 : Integer.parseInt(数字字符串);
-  }
-
-  public static List<String[]> 所有原始词条() {
-    return 所有行;
   }
 }

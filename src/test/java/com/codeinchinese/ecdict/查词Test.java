@@ -7,9 +7,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * 测试返回词条的每个域
+ *
+ */
 public class 查词Test {
-
-  ///// 下面测试每个域
 
   @Test
   public void 音标() {
@@ -28,6 +30,12 @@ public class 查词Test {
   public void 中文释义() {
     相等(英汉词典.查词("a").中文释义,
         Arrays.asList("第一个字母 A; 一个; 第一的\\r", "art. [计] 累加器, 加法器, 地址, 振幅, 模拟, 区域, 面积, 汇编, 组件, 异步"));
+    相等(英汉词典.查词("apple").中文释义,
+        Arrays.asList("n. 苹果, 家伙", "[医] 苹果"));
+    相等(英汉词典.查词("item").中文释义,
+        Arrays.asList("n. 项目, 条款, 一则, 项", "[计] 项"));
+    相等(英汉词典.查词("append").中文释义,
+        Arrays.asList("vt. 附加, 增补, 盖章", "[计] DOS外部命令:为数据文件(非执行文件)设定一个或多个磁盘路径", "当程序执行时, DOS将在所设定的磁盘路径中查找不在当前路径下的文件"));
   }
 
   // TODO: 现在数据中'词语位置'域全为空
