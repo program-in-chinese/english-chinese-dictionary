@@ -3,6 +3,7 @@ package com.codeinchinese.ecdict;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +39,8 @@ public class 英汉词典 {
         词条 新词 = new 词条();
         新词.英文 = 行[0];
         新词.音标 = 行[1];
-        新词.英文释义 = 行[2];
-        新词.中文释义 = 行[3];
+        新词.英文释义 = 分隔释义(行[2]);
+        新词.中文释义 = 分隔释义(行[3]);
         新词.词语位置 = 行[4];
         新词.柯林斯星级 = 转为整数(行[5]);
         新词.为牛津三千核心词 = 转为布尔量(行[6]);
@@ -59,6 +60,13 @@ public class 英汉词典 {
 
   public static int 查词(String 英文词) {
     return 0;
+  }
+
+  private static List<String> 分隔释义(String 原释义) {
+    if (原释义.isEmpty()) {
+      return new ArrayList<>();
+    }
+    return Arrays.asList(原释义.split("\\\\n"));
   }
 
   private static List<词形变化> 转为词形变化(String 变形原字符串) {
