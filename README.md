@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/program-in-chinese/english-chinese-dictionary.svg?branch=master)](https://travis-ci.org/program-in-chinese/english-chinese-dictionary)
+
 # 英汉词典
 
 已提交到Maven Central Repository:
