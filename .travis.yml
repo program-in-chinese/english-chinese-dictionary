@@ -1,0 +1,6 @@
+language: java
+install: mvn install -Dmaven.javadoc.skip=true -Dgpg.skip=true -B -V
+jdk:
+  - oraclejdk9
+  - oraclejdk8
+dist: trusty
