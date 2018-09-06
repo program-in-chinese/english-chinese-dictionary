@@ -2,6 +2,8 @@
 
 # 英汉词典
 
+### 注意: 首次查词前需加载数据, 本机测试约十秒左右, 之后查词为HashMap查询.
+
 已提交到Maven Central Repository:
 ```
 <dependency>
