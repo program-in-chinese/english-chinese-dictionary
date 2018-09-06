@@ -1,7 +1,8 @@
 package com.codeinchinese.英汉词典;
 
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,8 +20,8 @@ import com.opencsv.RFC4180ParserBuilder;
  * 可查单词和常见词组, 如: be bad at, beat around the bush 等
  */
 public class 英汉词典 {
-
-  private static final String 源数据文件 = "src/main/resources/ecdict.csv";
+  private static final InputStream 输入流 =
+      英汉词典.class.getClassLoader().getResourceAsStream("ecdict.csv");
   private static final List<String[]> 所有行 = new ArrayList<>();
 
   protected static Map<String, 词条> 查词表 = new HashMap<>();
@@ -28,11 +29,11 @@ public class 英汉词典 {
   private static CSVReader 读者 = null;
 
   static {
-    RFC4180Parser rfc4180Parser = new RFC4180ParserBuilder().build();
+    RFC4180Parser rfc4180分析器 = new RFC4180ParserBuilder().build();
 
     try {
       CSVReaderBuilder csvReaderBuilder =
-          new CSVReaderBuilder(new FileReader(源数据文件)).withCSVParser(rfc4180Parser);
+          new CSVReaderBuilder(new InputStreamReader(输入流)).withCSVParser(rfc4180分析器);
 
       读者 = csvReaderBuilder.build();
 
