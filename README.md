@@ -12,5 +12,6 @@
   <version>0.0.1</version>
 </dependency>
 ```
+[中文编程知乎专栏](https://zhuanlan.zhihu.com/c_140193266)介绍文章: [Java实现英汉词典API初版发布在Maven](https://zhuanlan.zhihu.com/p/43977821)
 
 LGPL许可证

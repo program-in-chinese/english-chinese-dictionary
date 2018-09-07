@@ -2,6 +2,8 @@ package com.codeinchinese.英汉词典;
 
 public class 词形变化 {
   public 词形变化类型 类型;
+
+  // TODO: shopping - 原型:shop; 原型变换形式:i; <-- i应转换为'现在分词'
   public String 词形;
 
   public 词形变化(词形变化类型 类型, String 词形) {
