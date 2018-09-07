@@ -9,10 +9,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import com.codeinchinese.英汉词典.英汉词典;
-import com.codeinchinese.英汉词典.词形变化;
-import com.codeinchinese.英汉词典.词条;
-
 public class 词表校验Test {
 
   // 英文释义有\n但并非分隔符
@@ -258,7 +254,31 @@ public class 词表校验Test {
   }
 
   @Test
-  public void 验证英文释义非空() {
+  public void 验证英文释义为空词数() {
+    int 词数 = 0;
+    for (String[] 词条 : 英汉词典.所有原始词条()) {
+      词条 某词条 = 英汉词典.查词(词条[0]);
+      if (某词条.英文释义.isEmpty()) {
+        词数++;
+      }
+    }
+    相等(词数, 609727);
+  }
+
+  @Test
+  public void 验证中文释义为空词数() {
+    int 词数 = 0;
+    for (String[] 词条 : 英汉词典.所有原始词条()) {
+      词条 某词条 = 英汉词典.查词(词条[0]);
+      if (某词条.中文释义.isEmpty()) {
+        词数++;
+      }
+    }
+    相等(词数, 1872);
+  }
+
+  @Test
+  public void 验证单项英文释义非空() {
     for (String[] 词条 : 英汉词典.所有原始词条()) {
       词条 某词条 = 英汉词典.查词(词条[0]);
       if (!英文释义带换行的词汇.contains(某词条.英文)) {
@@ -270,7 +290,7 @@ public class 词表校验Test {
   }
 
   @Test
-  public void 验证中文释义非空() {
+  public void 验证单项中文释义非空() {
     for (String[] 词条 : 英汉词典.所有原始词条()) {
       词条 某词条 = 英汉词典.查词(词条[0]);
       if (!中文释义带换行的词汇.contains(某词条.英文) && !中文释义为英文且换行的词汇.contains(某词条.英文)) {
