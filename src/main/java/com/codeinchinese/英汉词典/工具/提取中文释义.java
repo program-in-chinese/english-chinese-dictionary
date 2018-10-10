@@ -1,0 +1,56 @@
+package com.codeinchinese.英汉词典.工具;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.codeinchinese.英汉词典.词条;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriter;
+import com.opencsv.RFC4180Parser;
+import com.opencsv.RFC4180ParserBuilder;
+
+public class 提取中文释义 {
+
+  private static final String 输出文件名 = "中文释义.csv";
+  private static final InputStream 输入流 =
+      提取中文释义.class.getClassLoader().getResourceAsStream("ecdict.csv");
+  private static final List<String[]> 所有行 = new ArrayList<>();
+
+  protected static Map<String, 词条> 查词表 = new HashMap<>();
+
+  private static CSVReader 读者 = null;
+
+  public static void main(String[] args) {
+    RFC4180Parser rfc4180分析器 = new RFC4180ParserBuilder().build();
+
+    try {
+      CSVReaderBuilder csvReaderBuilder =
+          new CSVReaderBuilder(new InputStreamReader(输入流)).withCSVParser(rfc4180分析器);
+
+      CSVWriter 写者 = new CSVWriter(new FileWriter(Paths.get(输出文件名).toString()));
+      读者 = csvReaderBuilder.build();
+
+      // 跳过第一行(头)
+      读者.readNext();
+      String[] 行;
+      while ((行 = 读者.readNext()) != null) {
+        所有行.add(行);
+        String 英文 = 行[0];
+        String 中文释义 = 行[3];
+        写者.writeNext(new String[] {英文, 中文释义});
+      }
+      写者.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+}
