@@ -108,3 +108,6 @@ buildNumber.properties
 
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
+
+# 转换的JSON文件
+*.json
